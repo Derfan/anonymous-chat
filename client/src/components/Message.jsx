@@ -1,13 +1,20 @@
 import React from 'react';
 import T from 'prop-types';
 
-const Message = (props) => {
+const Message = ({message: {id, text}}) => {
     return (
-        <div></div>
+        <div>
+            <p>{text}</p>
+        </div>
     );
 };
 
-Message.propTypes = {};
+Message.propTypes = {
+    message: T.shape({
+        id: T.string.isRequired,
+        text: T.string.isRequired
+    }).isRequired
+};
 Message.defaultProps = {};
 
 export default Message;

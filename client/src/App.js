@@ -1,19 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Messages from './components/Messages';
 import NewMessage from './components/NewMessage';
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Welcome!</h1>
+const App = () => (
+    <div>
+        <h2>Welcome!</h2>
 
-                <Messages/>
+        <Messages/>
 
-                <NewMessage/>
-            </div>
-        );
-    }
-}
+        <NewMessage/>
+    </div>
+);
 
 export default App;

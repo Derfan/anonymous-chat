@@ -1,5 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import T from 'prop-types';
+import {addMessage} from '../redux/actions/message';
+
+const connector = connect(
+    state => ({}),
+    {addMessage}
+);
 
 const NewMessage = (props) => {
     const fields = {};
@@ -8,8 +15,7 @@ const NewMessage = (props) => {
 
         const {message} = fields;
 
-        console.log('message', message.value);
-
+        props.addMessage(message.value);
         e.target.reset();
     };
 
@@ -29,4 +35,4 @@ const NewMessage = (props) => {
 NewMessage.propTypes = {};
 NewMessage.defaultProps = {};
 
-export default NewMessage;
+export default connector(NewMessage);

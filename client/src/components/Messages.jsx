@@ -1,6 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import T from 'prop-types';
 import Message from './Message';
+import {getMessagesList} from '../redux/reducers/message';
+
+const connector = connect(
+    state => ({
+        messages: getMessagesList(state)
+    })
+);
 
 const Messages = (props) => {
     return (
@@ -17,4 +25,4 @@ const Messages = (props) => {
 Messages.propTypes = {};
 Messages.defaultProps = {};
 
-export default Messages;
+export default connector(Messages);
