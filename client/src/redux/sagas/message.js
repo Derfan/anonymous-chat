@@ -1,14 +1,38 @@
-import {takeEvery, put, apply} from 'redux-saga/effects';
+import {call, put, take, takeEvery, apply, all} from 'redux-saga/effects';
 import uuid from 'uuid/v1';
-import * as types from '../actions/message';
-import {socket} from '../../socket';
+import {socket, connect, createSocketChannel} from '../../socket';
+import {addMessage, saveMessage, ADD_MESSAGE, SEND_MESSAGE} from '../actions/message';
+import {saveCustomerInfo} from "../actions/customer";
+
+function* socketListener() {
+    const socket = yield call(connect);
+    const socketChannel = yield call(createSocketChannel, socket);
+
+    while (true) {
+        const payload = yield take(socketChannel);
+
+        yield put(addMessage(payload));
+    }
+}
 
 function* newMessage({payload}) {
     const message = {id: uuid(), ...payload};
 
-    yield put(types.saveMessage(message));
+    if (payload.type === 'CONNECT') {
+        yield put(saveCustomerInfo(payload.customer));
+    }
+
+    yield put(saveMessage(message));
 }
 
-export function* messageFlow() {
-    yield takeEvery(types.ADD_MESSAGE, newMessage);
+function* sendMessage({payload}) {
+    yield apply(socket, socket.emit, ['message', payload]);
+}
+
+export function* socketFlow() {
+    yield all([
+        socketListener(),
+        takeEvery(ADD_MESSAGE, newMessage),
+        takeEvery(SEND_MESSAGE, sendMessage)
+    ]);
 }

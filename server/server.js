@@ -10,7 +10,7 @@ io.sockets.on('connection', socket => {
     const clientIP = socket.request.connection.remoteAddress;
     console.log('New connection from ' + clientIP);
 
-    io.sockets.emit('message', {type: 'CONNECT', ip: clientIP});
+    io.sockets.emit('message', {type: 'CONNECT', ip: clientIP, customer: {clientIP, createDate: Date.now()}});
 
     socket.on('message', msg => {
         console.log('Have new message: ', msg);

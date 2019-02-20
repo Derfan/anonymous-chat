@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import T from 'prop-types';
+import {getCustomerInfo} from '../redux/reducers/customer';
 
 const styles = {
     CONNECT: {
@@ -28,17 +30,25 @@ const styles = {
     }
 };
 
-const getPlate = message => {
+const connector = connect(
+    state => ({
+        info: getCustomerInfo(state)
+    })
+);
+
+const getPlate = (message) => {
     switch (message.type) {
         case 'CONNECT':
         case 'DISCONNECT':
             return <div>{message.type}: {message.ip}</div>;
         case 'MESSAGE':
-            return <div style={styles.msg}>
-                <p style={styles.author}>{message.ip}:</p>
+            return (
+                <div style={styles.msg}>
+                    <p style={styles.author}>{message.ip}:</p>
 
-                <p style={styles.text}>{message.text}</p>
-            </div>;
+                    <p style={styles.text}>{message.text}</p>
+                </div>
+            );
         default:
             return <div>Неопознанное сообщение</div>
     }
@@ -61,4 +71,4 @@ Message.propTypes = {
 };
 Message.defaultProps = {};
 
-export default Message;
+export default connector(Message);

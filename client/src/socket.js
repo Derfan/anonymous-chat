@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import {eventChannel} from 'redux-saga';
 
-const SOCKET_URL = 'http://10.10.11.171:5001';
+const SOCKET_URL = 'http://localhost:5001';
 
 export const socket = io(SOCKET_URL);
 

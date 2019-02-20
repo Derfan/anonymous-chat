@@ -9,7 +9,7 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         border: '1px solid white',
-        margin: '5px',
+        marginTop: '5px',
         padding: '5px'
     },
     prefix: {
@@ -46,7 +46,7 @@ class NewMessage extends React.Component {
     render() {
         return (
             <form onSubmit={this.submitHandler} style={styles.form}>
-                <span style={styles.prefix}>>></span>
+                <span style={styles.prefix}>>>></span>
 
                 <input
                     style={styles.input}

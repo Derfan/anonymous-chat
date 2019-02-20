@@ -35,4 +35,5 @@ ul > li {
 #root {
     height: 100%;
     min-height: 600px;
+    padding: 5px;
 }
