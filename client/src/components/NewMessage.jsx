@@ -1,36 +1,71 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import T from 'prop-types';
-import {addMessage} from '../redux/actions/message';
+import {sendMessage} from '../redux/actions/message';
+
+const styles = {
+    form: {
+        flex: '0 0 auto',
+        display: 'flex',
+        alignItems: 'center',
+        border: '1px solid white',
+        margin: '5px',
+        padding: '5px'
+    },
+    prefix: {
+        flex: '0 0 auto',
+        fontSize: '16px',
+        color: 'green',
+        fontWeight: 700
+    },
+    input: {
+        flex: '1 0 auto',
+        border: 'none',
+        outline: 'none',
+        height: '100%',
+        fontSize: '16px',
+        color: 'green',
+        padding: '0 5px',
+        background: 'black',
+        fontWeight: 700
+    }
+};
 
 const connector = connect(
-    state => ({}),
-    {addMessage}
+    null,
+    {sendMessage}
 );
 
-const NewMessage = (props) => {
-    const fields = {};
-    const submitHandler = e => {
+class NewMessage extends React.Component {
+    fields = {};
+
+    componentDidMount() {
+        this.fields.message.focus()
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.submitHandler} style={styles.form}>
+                <span style={styles.prefix}>>></span>
+
+                <input
+                    style={styles.input}
+                    type="text"
+                    ref={i => this.fields.message = i}
+                />
+            </form>
+        );
+    }
+
+    submitHandler = e => {
         e.preventDefault();
 
-        const {message} = fields;
+        const {message} = this.fields;
 
-        props.addMessage(message.value);
+        this.props.sendMessage({text: message.value});
         e.target.reset();
     };
-
-    return (
-        <form onSubmit={submitHandler}>
-            <input
-                type="text"
-                ref={i => fields.message = i}
-                placeholder='Message...'
-            />
-
-            <button>Send</button>
-        </form>
-    );
-};
+}
 
 NewMessage.propTypes = {};
 NewMessage.defaultProps = {};

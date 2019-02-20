@@ -2,10 +2,16 @@ import React from 'react';
 import Messages from './components/Messages';
 import NewMessage from './components/NewMessage';
 
-const App = () => (
-    <div>
-        <h2>Welcome!</h2>
+const styles = {
+    wrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%'
+    }
+};
 
+const App = () => (
+    <div style={styles.wrapper}>
         <Messages/>
 
         <NewMessage/>

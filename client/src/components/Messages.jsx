@@ -4,6 +4,16 @@ import T from 'prop-types';
 import Message from './Message';
 import {getMessagesList} from '../redux/reducers/message';
 
+const styles = {
+    messages: {
+        flex: '1 0 auto',
+        border: '1px solid white',
+        margin: '5px',
+        padding: '5px',
+        overflowX: 'hidden'
+    }
+};
+
 const connector = connect(
     state => ({
         messages: getMessagesList(state)
@@ -12,7 +22,7 @@ const connector = connect(
 
 const Messages = (props) => {
     return (
-        <div>
+        <div style={styles.messages}>
             {props.messages && props.messages.length ?
                 props.messages.map(message => <Message key={message.id} message={message}/>)
                 :

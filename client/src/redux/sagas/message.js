@@ -1,9 +1,10 @@
-import {takeEvery, put} from 'redux-saga/effects';
+import {takeEvery, put, apply} from 'redux-saga/effects';
 import uuid from 'uuid/v1';
 import * as types from '../actions/message';
+import {socket} from '../../socket';
 
-function* newMessage({text}) {
-    const message = {id: uuid(), text};
+function* newMessage({payload}) {
+    const message = {id: uuid(), ...payload};
 
     yield put(types.saveMessage(message));
 }
