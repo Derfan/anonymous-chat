@@ -6,11 +6,13 @@ import {getMessagesList} from '../redux/reducers/message';
 
 const styles = {
     messages: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
         flex: '1 0 auto',
         border: '1px solid white',
         margin: '5px',
-        padding: '5px',
-        overflowX: 'hidden'
+        padding: '5px'
     }
 };
 
