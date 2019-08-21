@@ -5,8 +5,14 @@
   "repository": "git@github.com:Derfan/anonymous-chat.git",
   "author": "Boris Medvedev <b.medvedev@icloud.com>",
   "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon"
+  },
   "dependencies": {
     "express": "^4.16.4",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
